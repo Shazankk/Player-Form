@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       const players = await response.json();
+      players.sort((a, b) => a.name.localeCompare(b.name));
       const options = players
         .map(
           (player) =>
