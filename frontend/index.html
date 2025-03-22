@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Player Details Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-lg bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-xl font-bold mb-4">
+        Colchester Cavaliers Player Details
+      </h2>
+
+      <!-- Progress Steps -->
+      <div class="progress-steps mb-6">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div class="step-label">Player Info</div>
+        </div>
+        <div class="step" id="imageStep">
+          <div class="step-number">2</div>
+          <div class="step-label">Upload Image</div>
+        </div>
+        <div class="step" id="submitStep">
+          <div class="step-number">3</div>
+          <div class="step-label">Submit</div>
+        </div>
+      </div>
+
+      <form id="playerForm">
+        <label class="block mb-2"
+          >Player Name:<span class="required-field">*</span></label
+        >
+        <select
+          id="playerSelect"
+          name="player_name"
+          class="w-full p-2 border rounded-md mb-4"
+        ></select>
+
+        <label class="block mb-2">Birth Date:</label>
+        <input
+          type="date"
+          name="birth_date"
+          class="w-full p-2 border rounded-md mb-4"
+          required
+        />
+
+        <label class="block mb-2">Nationality:</label>
+        <select
+          name="nationality"
+          class="w-full p-2 border rounded-md mb-4"
+          required
+        >
+          <option value="">Select Nationality</option>
+          <option value="India">India</option>
+          <option value="Australia">Australia</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Nepal">Nepal</option>
+          <option value="Sri Lanka">Sri Lanka</option>
+        </select>
+
+        <label class="block mb-2">Role:</label>
+        <select name="role" class="w-full p-2 border rounded-md mb-4" required>
+          <option value="">Select Role</option>
+          <option value="Batsman">Batsman</option>
+          <option value="Bowler">Bowler</option>
+          <option value="All Rounder">All Rounder</option>
+        </select>
+
+        <label class="block mb-2">Batting Style:</label>
+        <select
+          name="batting_style"
+          class="w-full p-2 border rounded-md mb-4"
+          required
+        >
+          <option value="">Select Batting Style</option>
+          <option value="Left Hand">Left Hand</option>
+          <option value="Right Hand">Right Hand</option>
+        </select>
+
+        <label class="block mb-2">Bowling Hand:</label>
+        <select
+          name="bowling_hand"
+          class="w-full p-2 border rounded-md mb-4"
+          required
+        >
+          <option value="">Select Bowling Hand</option>
+          <option value="Left Hand">Left Hand</option>
+          <option value="Right Hand">Right Hand</option>
+        </select>
+
+        <label class="block mb-2">Bowling Style:</label>
+        <select
+          name="bowling_style"
+          class="w-full p-2 border rounded-md mb-4"
+          required
+        >
+          <option value="">Select Bowling Style</option>
+          <option value="Fast">Fast</option>
+          <option value="Medium">Medium</option>
+          <option value="Spin">Spin</option>
+        </select>
+
+        <label class="block mb-2">Debut Year:</label>
+        <!-- Replace the existing script tag that generates debut year options with this: -->
+        <select
+          name="debut_year"
+          class="w-full p-2 border rounded-md mb-4"
+          required
+        >
+          <option value="">Select Debut Year</option>
+          <script>
+            const currentYear = new Date().getFullYear();
+            for (let year = currentYear; year >= 1988; year--) {
+              document.write(`<option value="${year}">${year}</option>`);
+            }
+          </script>
+        </select>
+
+        <div class="mb-4">
+          <label class="block mb-2"
+            >Player Image:<span class="required-field">*</span></label
+          >
+          <div class="image-upload-container" id="imageUploadContainer">
+            <div class="flex items-start">
+              <div class="flex-grow mr-2">
+                <input
+                  type="file"
+                  id="imageUpload"
+                  name="image"
+                  accept="image/*"
+                  class="w-full p-2 border rounded-md"
+                  required
+                />
+              </div>
+              <button
+                type="button"
+                id="uploadImageBtn"
+                class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+              >
+                Upload
+              </button>
+            </div>
+
+            <!-- Image upload status and preview -->
+            <div id="imageStatus" class="mt-2 hidden">
+              <div id="uploadingIndicator" class="text-blue-500 hidden">
+                <span class="status-indicator">⟳</span>
+                <span>Uploading image...</span>
+              </div>
+              <div id="uploadSuccess" class="text-green-500 hidden">
+                <span class="status-indicator success">✓</span>
+                <span>Image uploaded successfully</span>
+              </div>
+              <div id="uploadError" class="text-red-500 hidden">
+                <span class="status-indicator error">✗</span>
+                <span>Upload failed. Please try again.</span>
+              </div>
+            </div>
+
+            <!-- Image preview -->
+            <div
+              id="imagePreview"
+              class="hidden mt-2 rounded-md border overflow-hidden"
+              style="max-width: 200px"
+            ></div>
+          </div>
+        </div>
+
+        <div class="submit-button-container">
+          <button
+            type="submit"
+            id="submitBtn"
+            class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+            disabled
+          >
+            Submit
+          </button>
+          <div class="button-helper-text" id="submitHelperText">
+            Please fill in all required fields and upload an image to enable
+            submission
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

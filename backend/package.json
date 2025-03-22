@@ -1,0 +1,27 @@
+{
+  "name": "player-form",
+  "version": "1.0.0",
+  "description": "A Fastify-based backend for handling player form submissions, storing data in Turso DB, and uploading images to Cloudflare R2.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test:api": "node tests/testApi.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.758.0",
+    "@fastify/cors": "^11.0.0",
+    "@fastify/multipart": "^9.0.3",
+    "@libsql/client": "^0.14.0",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "license": "MIT"
+}
